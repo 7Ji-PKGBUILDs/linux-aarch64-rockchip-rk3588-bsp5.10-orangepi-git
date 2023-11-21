@@ -11,11 +11,11 @@ pkgbase = linux-aarch64-orangepi5-git
 	makedepends = git
 	options = !strip
 	options = !distcc
-	source = https://github.com/orangepi-xunlong/linux-orangepi#branch=orange-pi-5.10-rk3588
+	source = git+https://github.com/orangepi-xunlong/linux-orangepi#branch=orange-pi-5.10-rk3588
 	source = gcc12-fixups.patch::https://github.com/7Ji-PKGBUILDs/linux-aarch64-orangepi5-git/releases/download/assets/sha256-e9c720fa4dba291f3a87a04eb9245fcf99cd0c4164d2c5deefe7ca35eedf1960-gcc12-fixups.patch
 	source = config
 	source = linux.preset
-	sha256sums = 93ebccfed4d5d1f5a1612c06520a83346fcf4522dcf50c67bae11359f3f32d85
+	sha256sums = SKIP
 	sha256sums = e9c720fa4dba291f3a87a04eb9245fcf99cd0c4164d2c5deefe7ca35eedf1960
 	sha256sums = 325e4afdc16e1eb34e18e651b0c7b8cb43a60ade086d8388aa5667d913157e55
 	sha256sums = bdcd6cbf19284b60fac6d6772f1e0ec2e2fe03ce7fe3d7d16844dd6d2b5711f3
