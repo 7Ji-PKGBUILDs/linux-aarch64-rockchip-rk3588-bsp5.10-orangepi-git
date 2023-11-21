@@ -12,10 +12,11 @@ pkgname=(
   "${pkgbase}"
   "${pkgbase}-headers"
 )
-pkgver="${_pkgver_main}"
+pkgver=5.10.110.r48.eb1c681e5.ced0156
 pkgrel=1
 arch=(aarch64)
-url="https://github.com/orangepi-xunlong/${_orangepi_repo}"
+_gh_ornagepi=https://github.com/orangepi-xunlong
+url="${_gh_ornagepi}/${_orangepi_repo}"
 license=(GPL2)
 makedepends=( # Since we don't build the doc, most of the makedeps for other linux packages are not needed here
   'kmod' 'bc' 'dtc' 'uboot-tools' 'git'
@@ -23,17 +24,19 @@ makedepends=( # Since we don't build the doc, most of the makedeps for other lin
 options=(!strip !distcc)
 _sha256_gcc12_fixups_patch='e9c720fa4dba291f3a87a04eb9245fcf99cd0c4164d2c5deefe7ca35eedf1960'
 source=(
-  "git+${url}#branch=orange-pi-5.10-rk3588"
+  "git+${url}.git#branch=orange-pi-5.10-rk3588"
+  "git+${_gh_ornagepi}/orangepi-build.git#branch=next"
   "gcc12-fixups.patch::https://github.com/7Ji-PKGBUILDs/${pkgbase}/releases/download/assets/sha256-${_sha256_gcc12_fixups_patch}-gcc12-fixups.patch"
-  'config'
   'linux.preset'
 )
 sha256sums=(
   'SKIP'
+  'SKIP'
   "${_sha256_gcc12_fixups_patch}"
-  '325e4afdc16e1eb34e18e651b0c7b8cb43a60ade086d8388aa5667d913157e55'
   'bdcd6cbf19284b60fac6d6772f1e0ec2e2fe03ce7fe3d7d16844dd6d2b5711f3'
 )
+
+_config=external/config/kernel/linux-rockchip-rk3588-legacy.config
 
 prepare() {
   cd "${_srcname}"
@@ -47,12 +50,21 @@ prepare() {
   echo "${pkgbase#linux}" > localversion.20-pkgname
 
   # Prepare the configuration file
-  cat "${srcdir}/config" > '.config'
+  cat "../orangepi-build/${_config}" > '.config'
 }
 
 pkgver() {
   cd "${_srcname}"
-  printf "%s.r%s.%s" "${_pkgver_main}" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  local rev_kernel="$(git rev-list --count HEAD)"
+  local id_kernel="$(git rev-parse --short HEAD)"
+  cd ../orangepi-build
+  local rev_config="$(git rev-list --count HEAD "${_config}")"
+  local id_config="$(git rev-parse --short HEAD:"${_config}")"
+  printf "%s.r%s.%s.%s" \
+    "${_pkgver_main}" \
+    "$(( "${rev_kernel}" + "${rev_config}" ))" \
+    "${id_kernel}" \
+    "${id_config}"
 }
 
 build() {
