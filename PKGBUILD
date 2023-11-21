@@ -1,6 +1,6 @@
 # Maintainer: 7Ji <pugokughin@gmail.com>
 
-_desc="AArch64 vendor kernel for Orange Pi 5 (git version)"
+_desc="AArch64 vendor kernel for Orange Pi 5/5B/5Plus/5Pro (git version)"
 _pkgver_main=5.10.110
 _pkgver_suffix=orangepi5
 _pkgver_uname=${_pkgver_main}-${_pkgver_suffix}
@@ -24,7 +24,7 @@ makedepends=( # Since we don't build the doc, most of the makedeps for other lin
 options=(!strip !distcc)
 _sha256_gcc12_fixups_patch='e9c720fa4dba291f3a87a04eb9245fcf99cd0c4164d2c5deefe7ca35eedf1960'
 source=(
-  "git+${url}.git#branch=orange-pi-5.10-rk3588"
+  "git+${url}.git#branch=orange-pi-5.10-rk35xx"
   "git+${_gh_ornagepi}/orangepi-build.git#branch=next"
   "gcc12-fixups.patch::https://github.com/7Ji-PKGBUILDs/${pkgbase}/releases/download/assets/sha256-${_sha256_gcc12_fixups_patch}-gcc12-fixups.patch"
   'linux.preset'
@@ -51,6 +51,7 @@ prepare() {
 
   # Prepare the configuration file
   cat "../orangepi-build/${_config}" > '.config'
+  make olddefconfig
 }
 
 pkgver() {
