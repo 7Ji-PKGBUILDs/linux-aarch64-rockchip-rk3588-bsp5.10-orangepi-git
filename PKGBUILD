@@ -89,8 +89,6 @@ _package() {
     'linux-firmware: firmware images needed for some devices'
     'wireless-regdb: to set the correct wireless channels of your country'
   )
-  provides=("${_pkgbase}=${pkgver}")
-  conflicts=("${_pkgbase}")
   backup=(
     "etc/mkinitcpio.d/${pkgbase}.preset"
   )
@@ -132,8 +130,6 @@ _package-headers() {
   # About why depends instead of optdepends, this is a similar decision to
   # https://bugs.archlinux.org/task/69654
   depends=('python')
-  provides=("${_pkgbase}-headers=${pkgver}")
-  conflicts=("${_pkgbase}-headers")
   
   # Mostly copied from alarm's linux-aarch64 and modified
   cd "${_srcname}"
