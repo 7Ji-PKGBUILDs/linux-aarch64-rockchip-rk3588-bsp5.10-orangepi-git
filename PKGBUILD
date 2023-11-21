@@ -22,7 +22,6 @@ makedepends=( # Since we don't build the doc, most of the makedeps for other lin
   'kmod' 'bc' 'dtc' 'uboot-tools' 'git'
 )
 options=(!strip !distcc)
-_sha256_gcc12_fixups_patch='e9c720fa4dba291f3a87a04eb9245fcf99cd0c4164d2c5deefe7ca35eedf1960'
 source=(
   "git+${url}.git#branch=orange-pi-5.10-rk35xx"
   "git+${_gh_ornagepi}/orangepi-build.git#branch=next"
@@ -38,9 +37,6 @@ _config=external/config/kernel/linux-rockchip-rk3588-legacy.config
 
 prepare() {
   cd "${_srcname}"
-
-  echo "Patching kernel so it could be built with GCC 12..."
-  patch -p1 < ../gcc12-fixups.patch
 
   echo "Setting version..."
   scripts/setlocalversion --save-scmversion
