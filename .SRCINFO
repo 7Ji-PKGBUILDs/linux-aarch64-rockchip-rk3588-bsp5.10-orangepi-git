@@ -26,8 +26,12 @@ pkgname = linux-aarch64-orangepi5-git
 	optdepends = uboot-legacy-initrd-hooks: to generate uboot legacy initrd images
 	optdepends = linux-firmware: firmware images needed for some devices
 	optdepends = wireless-regdb: to set the correct wireless channels of your country
+	provides = linux-aarch64-orangepi5=5.10.110.r48.eb1c681e5.ced0156
+	conflicts = linux-aarch64-orangepi5
 	backup = etc/mkinitcpio.d/linux-aarch64-orangepi5-git.preset
 
 pkgname = linux-aarch64-orangepi5-git-headers
 	pkgdesc = Header files and scripts for building modules for linux kernel - AArch64 vendor kernel for Orange Pi 5/5B/5Plus/5Pro (git version)
 	depends = python
+	provides = linux-aarch64-orangepi5-headers=5.10.110.r48.eb1c681e5.ced0156
+	conflicts = linux-aarch64-orangepi5-headers
