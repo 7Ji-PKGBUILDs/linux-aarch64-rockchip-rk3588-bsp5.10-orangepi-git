@@ -1,5 +1,5 @@
 pkgbase = linux-aarch64-orangepi5-git
-	pkgver = 5.10.110.r48.eb1c681e5.ced0156
+	pkgver = 5.10.160.r48.eb1c681e5.ced0156
 	pkgrel = 1
 	url = https://github.com/orangepi-xunlong/linux-orangepi
 	arch = aarch64

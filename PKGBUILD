@@ -1,7 +1,6 @@
 # Maintainer: 7Ji <pugokughin@gmail.com>
 
 _desc="AArch64 vendor kernel for Orange Pi 5/5B/5Plus/5Pro (git version)"
-_pkgver_main=5.10.110
 _pkgver_suffix=orangepi5
 _pkgver_uname=${_pkgver_main}-${_pkgver_suffix}
 _orangepi_repo=linux-orangepi
@@ -12,7 +11,7 @@ pkgname=(
   "${pkgbase}"
   "${pkgbase}-headers"
 )
-pkgver=5.10.110.r48.eb1c681e5.ced0156
+pkgver=5.10.160.r48.eb1c681e5.ced0156
 pkgrel=1
 arch=(aarch64)
 _gh_ornagepi=https://github.com/orangepi-xunlong
@@ -36,30 +35,36 @@ sha256sums=(
 _config=external/config/kernel/linux-rockchip-rk3588-legacy.config
 
 prepare() {
-  cd "${_srcname}"
-
   echo "Setting version..."
+  cd orangepi-build
+  local rev_config="$(git rev-list --count HEAD "${_config}")"
+  local id_config="$(git rev-parse --short HEAD:"${_config}")"
+  cd ../"${_srcname}"
+  local rev_kernel="$(git rev-list --count HEAD)"
+  local id_kernel="$(git rev-parse --short HEAD)"
   scripts/setlocalversion --save-scmversion
-  echo "-$pkgrel" > localversion.10-pkgrel
-  echo "${pkgbase#linux}" > localversion.20-pkgname
 
-  # Prepare the configuration file
+  echo - > localversion.09-hyphen
+  echo "r$(( "${rev_kernel}" + "${rev_config}" ))" > localversion.10-release-total
+  echo - > localversion.19-hyphen
+  echo "${id_kernel}" > localversion.20-id-kernel
+  echo - > localversion.29-hyphen
+  echo "${id_config}" > localversion.30-id-config
+  echo "-${pkgrel}" > localversion.40-pkgrel
+  echo "${pkgbase#linux}" > localversion.50-pkgname
+
+  echo "Updating config file..."
   cat "../orangepi-build/${_config}" > '.config'
   make olddefconfig
 }
 
 pkgver() {
   cd "${_srcname}"
-  local rev_kernel="$(git rev-list --count HEAD)"
-  local id_kernel="$(git rev-parse --short HEAD)"
-  cd ../orangepi-build
-  local rev_config="$(git rev-list --count HEAD "${_config}")"
-  local id_config="$(git rev-parse --short HEAD:"${_config}")"
-  printf "%s.r%s.%s.%s" \
-    "${_pkgver_main}" \
-    "$(( "${rev_kernel}" + "${rev_config}" ))" \
-    "${id_kernel}" \
-    "${id_config}"
+  printf '%s.%s.%s.%s' \
+    "$(make kernelversion)" \
+    "$(<localversion.10-release-total)" \
+    "$(<localversion.20-id-kernel)" \
+    "$(<localversion.30-id-config)"
 }
 
 build() {
