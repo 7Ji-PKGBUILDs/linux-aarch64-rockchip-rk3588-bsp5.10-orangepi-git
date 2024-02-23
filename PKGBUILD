@@ -11,7 +11,7 @@ pkgname=(
   "${pkgbase}"
   "${pkgbase}-headers"
 )
-pkgver=5.10.160.r48.eb1c681e5.ced0156
+pkgver=6.1.43.r1265811.752c0d0a12fd.609691c
 pkgrel=1
 arch=(aarch64)
 _gh_ornagepi=https://github.com/orangepi-xunlong
@@ -22,17 +22,19 @@ makedepends=( # Since we don't build the doc, most of the makedeps for other lin
 )
 options=(!strip !distcc)
 source=(
-  "git+${url}.git#branch=orange-pi-5.10-rk35xx"
+  "git+${url}.git#branch=orange-pi-6.1-rk35xx"
   "git+${_gh_ornagepi}/orangepi-build.git#branch=next"
   'linux.preset'
+  '02-downgrade-mali.patch'
 )
 sha256sums=(
   'SKIP'
   'SKIP'
   'bdcd6cbf19284b60fac6d6772f1e0ec2e2fe03ce7fe3d7d16844dd6d2b5711f3'
+  '92170421688d30824249a7380009614c42faec21a98eea1001ba5f2f5d82de2f'
 )
 
-_config=external/config/kernel/linux-rockchip-rk3588-legacy.config
+_config=external/config/kernel/linux-rockchip-rk3588-current.config
 
 prepare() {
   echo "Setting version..."
@@ -52,6 +54,9 @@ prepare() {
   echo "${id_config}" > localversion.30-id-config
   echo "-${pkgrel}" > localversion.40-pkgrel
   echo "${pkgbase#linux}" > localversion.50-pkgname
+
+  echo "Patch downgrade-mali.patch to fix strict warning..."
+  patch -p1 -N -i ../02-downgrade-mali.patch || true
 
   echo "Updating config file..."
   cat "../orangepi-build/${_config}" > '.config'

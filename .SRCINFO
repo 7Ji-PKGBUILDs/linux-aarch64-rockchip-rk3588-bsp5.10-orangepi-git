@@ -1,5 +1,5 @@
 pkgbase = linux-aarch64-orangepi5-git
-	pkgver = 5.10.160.r48.eb1c681e5.ced0156
+	pkgver = 6.1.43.r1265811.752c0d0a12fd.609691c
 	pkgrel = 1
 	url = https://github.com/orangepi-xunlong/linux-orangepi
 	arch = aarch64
@@ -11,12 +11,14 @@ pkgbase = linux-aarch64-orangepi5-git
 	makedepends = git
 	options = !strip
 	options = !distcc
-	source = git+https://github.com/orangepi-xunlong/linux-orangepi.git#branch=orange-pi-5.10-rk35xx
+	source = git+https://github.com/orangepi-xunlong/linux-orangepi.git#branch=orange-pi-6.1-rk35xx
 	source = git+https://github.com/orangepi-xunlong/orangepi-build.git#branch=next
 	source = linux.preset
+	source = 02-downgrade-mali.patch
 	sha256sums = SKIP
 	sha256sums = SKIP
 	sha256sums = bdcd6cbf19284b60fac6d6772f1e0ec2e2fe03ce7fe3d7d16844dd6d2b5711f3
+	sha256sums = 92170421688d30824249a7380009614c42faec21a98eea1001ba5f2f5d82de2f
 
 pkgname = linux-aarch64-orangepi5-git
 	pkgdesc = The Linux Kernel and module - AArch64 vendor kernel for Orange Pi 5/5B/5Plus/5Pro (git version)
