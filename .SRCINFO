@@ -1,4 +1,4 @@
-pkgbase = linux-aarch64-orangepi5-git
+pkgbase = linux-aarch64-rockchip-rk3588-bsp5.10-orangepi-git
 	pkgver = 5.10.160.r48.eb1c681e5.ced0156
 	pkgrel = 1
 	url = https://github.com/orangepi-xunlong/linux-orangepi
@@ -18,7 +18,7 @@ pkgbase = linux-aarch64-orangepi5-git
 	sha256sums = SKIP
 	sha256sums = bdcd6cbf19284b60fac6d6772f1e0ec2e2fe03ce7fe3d7d16844dd6d2b5711f3
 
-pkgname = linux-aarch64-orangepi5-git
+pkgname = linux-aarch64-rockchip-rk3588-bsp5.10-orangepi-git
 	pkgdesc = The Linux Kernel and module - AArch64 vendor kernel for Orange Pi 5/5B/5Plus/5Pro (git version)
 	depends = coreutils
 	depends = initramfs
@@ -26,8 +26,8 @@ pkgname = linux-aarch64-orangepi5-git
 	optdepends = uboot-legacy-initrd-hooks: to generate uboot legacy initrd images
 	optdepends = linux-firmware: firmware images needed for some devices
 	optdepends = wireless-regdb: to set the correct wireless channels of your country
-	backup = etc/mkinitcpio.d/linux-aarch64-orangepi5-git.preset
+	backup = etc/mkinitcpio.d/linux-aarch64-rockchip-rk3588-bsp5.10-orangepi-git.preset
 
-pkgname = linux-aarch64-orangepi5-git-headers
+pkgname = linux-aarch64-rockchip-rk3588-bsp5.10-orangepi-git-headers
 	pkgdesc = Header files and scripts for building modules for linux kernel - AArch64 vendor kernel for Orange Pi 5/5B/5Plus/5Pro (git version)
 	depends = python

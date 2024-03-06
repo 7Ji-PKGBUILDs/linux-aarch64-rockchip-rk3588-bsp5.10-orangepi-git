@@ -1,11 +1,9 @@
 # Maintainer: 7Ji <pugokughin@gmail.com>
 
 _desc="AArch64 vendor kernel for Orange Pi 5/5B/5Plus/5Pro (git version)"
-_pkgver_suffix=orangepi5
-_pkgver_uname=${_pkgver_main}-${_pkgver_suffix}
 _orangepi_repo=linux-orangepi
 _srcname=${_orangepi_repo}
-_pkgbase=linux-aarch64-${_pkgver_suffix}
+_pkgbase=linux-aarch64-rockchip-rk3588-bsp5.10-orangepi
 pkgbase=${_pkgbase}-git
 pkgname=(
   "${pkgbase}"
