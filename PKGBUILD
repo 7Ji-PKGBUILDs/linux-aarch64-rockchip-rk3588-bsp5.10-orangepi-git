@@ -49,7 +49,7 @@ prepare() {
   echo - > localversion.29-hyphen
   echo "${id_config}" > localversion.30-id-config
   echo "-${pkgrel}" > localversion.40-pkgrel
-  echo "${pkgbase#linux}" > localversion.50-pkgname
+  echo '-aarch64-rk3588-bsp5.10' > localversion.50-pkgname
 
   echo "Updating config file..."
   cat "../orangepi-build/${_config}" > '.config'
