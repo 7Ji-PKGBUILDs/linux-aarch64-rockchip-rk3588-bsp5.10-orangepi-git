@@ -51,6 +51,12 @@ prepare() {
   echo "-${pkgrel}" > localversion.40-pkgrel
   echo '-aarch64-rk3588-bsp5.10' > localversion.50-pkgname
 
+  # this is only for local builds so there is no need to integrity check. (if needed)
+  for p in ../../custom/*.patch; do
+    echo "Custom Patching with ${p}"
+    patch -p1 -N -i $p || true
+  done
+
   echo "Updating config file..."
   cat "../orangepi-build/${_config}" > '.config'
   make olddefconfig
