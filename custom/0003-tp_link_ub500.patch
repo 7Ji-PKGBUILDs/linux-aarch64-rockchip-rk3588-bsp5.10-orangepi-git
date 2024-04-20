@@ -1,0 +1,13 @@
+--- a/drivers/bluetooth/btusb.c	2024-04-10 13:53:16.722911588 +0300
++++ b/drivers/bluetooth/btusb.c	2024-04-10 13:57:11.010704352 +0300
+@@ -452,6 +452,10 @@
+ 	{ USB_DEVICE(0x0bda, 0xb009), .driver_info = BTUSB_REALTEK },
+ 	{ USB_DEVICE(0x2ff8, 0xb011), .driver_info = BTUSB_REALTEK },
+ 
++	/* Additional Realtek 8761B Bluetooth devices */
++	{ USB_DEVICE(0x2357, 0x0604), .driver_info = BTUSB_REALTEK |
++						     BTUSB_WIDEBAND_SPEECH },
++
+ 	/* Additional Realtek 8821AE Bluetooth devices */
+ 	{ USB_DEVICE(0x0b05, 0x17dc), .driver_info = BTUSB_REALTEK },
+ 	{ USB_DEVICE(0x13d3, 0x3414), .driver_info = BTUSB_REALTEK },
