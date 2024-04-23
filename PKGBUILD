@@ -9,7 +9,7 @@ pkgname=(
   "${pkgbase}"
   "${pkgbase}-headers"
 )
-pkgver=5.10.160.r48.eb1c681e5.ced0156
+pkgver=5.10.160.r1080214.4b357fedbdeb.f479be9
 pkgrel=1
 arch=(aarch64)
 _gh_ornagepi=https://github.com/orangepi-xunlong
@@ -22,12 +22,16 @@ options=(!strip !distcc)
 source=(
   "git+${url}.git#branch=orange-pi-5.10-rk35xx"
   "git+${_gh_ornagepi}/orangepi-build.git#branch=next"
-  'linux.preset'
+  '5895a048c1074336eda07f702f76386a7cf7312c2d53bb5e179171c61c420ed7'
+  'e4b889179584493256b45acda451c4d7f0d15a4d9d4e7731c9577ac5b7096adc'
+  '99dfd35ad2ed47b8d838d689844646c62aba136b4c62ec5e36fe9556c2d504bc'
 )
 sha256sums=(
   'SKIP'
   'SKIP'
-  'bdcd6cbf19284b60fac6d6772f1e0ec2e2fe03ce7fe3d7d16844dd6d2b5711f3'
+  '0001-rga3_uncompact_fix.patch'
+  '0002-vop2_rgba2101010_capability_fix.patch'
+  '0003-tp_link_ub500.patch'
 )
 
 _config=external/config/kernel/linux-rockchip-rk3588-legacy.config
@@ -98,9 +102,6 @@ _package() {
     'linux-firmware: firmware images needed for some devices'
     'wireless-regdb: to set the correct wireless channels of your country'
   )
-  backup=(
-    "etc/mkinitcpio.d/${pkgbase}.preset"
-  )
 
   cd "${_srcname}"
 
@@ -120,10 +121,6 @@ _package() {
 
   # Remove hbuild and source links, which points to folders used when building (i.e. dead links)
   rm -f "${_dir_module}/"{build,source}
-
-  # install mkinitcpio preset file
-  sed "s|%PKGBASE%|${pkgbase}|g" ../linux.preset |
-    install -Dm644 /dev/stdin "${pkgdir}/etc/mkinitcpio.d/${pkgbase}.preset"
 
   # Install DTB
   echo 'Installing DTBs for Rockchip SoCs...'
