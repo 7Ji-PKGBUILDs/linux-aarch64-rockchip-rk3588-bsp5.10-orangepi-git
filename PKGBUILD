@@ -16,7 +16,7 @@ _gh_ornagepi=https://github.com/orangepi-xunlong
 url="${_gh_ornagepi}/${_orangepi_repo}"
 license=(GPL2)
 makedepends=( # Since we don't build the doc, most of the makedeps for other linux packages are not needed here
-  'kmod' 'bc' 'dtc' 'uboot-tools' 'git'
+  'kmod' 'bc' 'dtc' 'uboot-tools' 'git' 'python'
 )
 options=(!strip !distcc)
 source=(

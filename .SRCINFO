@@ -9,6 +9,7 @@ pkgbase = linux-aarch64-rockchip-rk3588-bsp5.10-orangepi-git
 	makedepends = dtc
 	makedepends = uboot-tools
 	makedepends = git
+	makedepends = python
 	options = !strip
 	options = !distcc
 	source = git+https://github.com/orangepi-xunlong/linux-orangepi.git#branch=orange-pi-5.10-rk35xx
